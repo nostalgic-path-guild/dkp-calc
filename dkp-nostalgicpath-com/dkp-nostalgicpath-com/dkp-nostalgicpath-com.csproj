@@ -157,6 +157,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DumpUploadModel.cs" />
+    <Compile Include="Models\RaidDump.cs" />
     <Compile Include="Parse\RaidDump.cs" />
     <Compile Include="Parse\RaidMember.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

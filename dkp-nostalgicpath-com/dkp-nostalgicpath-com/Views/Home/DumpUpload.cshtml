@@ -27,7 +27,7 @@ else
     using (Html.BeginForm("UploadParse", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @id = "dumpForm" }))
     {
         @(Html.AntiForgeryToken())
-
+        @Html.Raw(System.Web.HttpUtility.HtmlDecode((Html.ValidationSummary(string.Empty, new { @class = "text-danger" }) ?? (object)"").ToString()))
     <div>
         @Html.LabelFor(m => m.TimeZoneId)
         @Html.DropDownListFor(m => m.TimeZoneId, timeZones)
@@ -38,11 +38,11 @@ else
             Browse @Html.TextBoxFor(model => model.files, "", new { @type = "file", @multiple = "multiple", @style = "display:none;", @accept = ".txt" })
         </label>
         @(Html.ValidationMessageFor(model => model.files, "", new { @class = "text-danger" }))
-        @*<input type="submit" value="Submit" />*@
     }
 }
 
 <script type="text/javascript">
+
     document.addEventListener( 'DOMContentLoaded', function () {
         var fileInput = document.querySelector( 'input[type=file]' );
         var fileForm = document.querySelector( '#dumpForm' );
@@ -50,10 +50,5 @@ else
         fileInput.addEventListener( 'change', function () { fileForm.submit(); } );
 
     } );
-    //$( document ).ready( function () {
-    //    $( 'input[type=file]' ).on( 'change', function () {
-    //        var form = $( this ).parent( 'form' );
-    //        form.submit();
-    //    } );
-    //} );
+
 </script>

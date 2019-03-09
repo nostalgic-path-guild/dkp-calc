@@ -9,11 +9,20 @@ namespace dkp_nostalgicpath_com.Parse
     {
         private static string[] columns = new string[] { "Group", "Name", "Level", "Class", "Role", "5", "6", "Flagged" };
 
+        /// <summary>
+        ///     Parses the raid dump attendance.
+        /// </summary>
+        /// 
+        /// <returns>
+        ///     Returns a list of all members that were in the raid dump.
+        /// </returns>
+        /// 
+        /// <param name="dump">The string content of the entire raid dump file.</param>
+        /// 
         public static List<RaidMember> ParseRaidDump(string dump)
         {
             var members = new List<RaidMember>();
 
-            //Execute a loop over the rows.
             foreach (string row in dump.Split('\n'))
             {
                 if (!string.IsNullOrEmpty(row))
@@ -36,9 +45,20 @@ namespace dkp_nostalgicpath_com.Parse
             return members;
         }
 
+        /// <summary>
+        ///     Parses the time of the raid dump.
+        /// </summary>
+        /// 
+        /// <returns>
+        ///     Returns the raid dump time converted to UTC.
+        /// </returns>
+        /// 
+        /// <param name="dumpFileName">The raid dump file name.</param>
+        /// <param name="timeZone">The time zone of the player making the raid dump.</param>
+        /// 
         public static DateTime ParseRaidTime(string dumpFileName, TimeZoneInfo timeZone)
         {
-            // RaidRoster_coirnav-20190304-222026
+            // es: RaidRoster_coirnav-20190304-222026
             var values = dumpFileName.Split('-');
             var year = int.Parse(values[1].Substring(0, 4));
             var month = int.Parse(values[1].Substring(4, 2));
